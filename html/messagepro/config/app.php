@@ -293,7 +293,12 @@ return [
       'className' => Connection::class,
       'driver' => Mysql::class,
       'persistent' => false,
-      'timezone' => 'UTC',
+      'timezone' => 'Asia/Tokyo',
+      // localが優先される件書く
+      'host' => 'mysql', // cakephp3_mysql でも接続可能
+      'username' => 'docker_db_user',
+      'password' => 'docker_db_user_pass',
+      'database' => 'docker_db',
 
       /*
              * For MariaDB/MySQL the internal default changed from utf8 to utf8mb4, aka full utf-8 support, in CakePHP 3.6
