@@ -57,11 +57,18 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+        $validator->setProvider('custom', 'App\Model\Validation\CustomValidation');
+
         $validator
             ->scalar('username')
             ->maxLength('username', 64)
             ->requirePresence('username', 'create')
             ->notEmptyString('username')
+            ->add('username', 'validateusername', [
+                'rule' => 'validateUsername',
+                'provider' => 'custom',
+                'message' => 'このユーザー名は無効です',
+            ])
             ->add('username', 'unique', [
                 'rule' => 'validateUnique',
                 'provider' => 'table',
