@@ -294,8 +294,10 @@ return [
       'driver' => Mysql::class,
       'persistent' => false,
       'timezone' => 'Asia/Tokyo',
-      // localが優先される件書く
-      'host' => 'mysql', // cakephp3_mysql でも接続可能
+      /*
+       * app_local.php を削除しておくこと。app_local.phpが優先されるため。
+       */
+      'host' => 'mysql', // 'cakephp3_mysql' でも接続可能。つまりサービス名でもコンテナ名でも接続できそう。
       'username' => 'docker_db_user',
       'password' => 'docker_db_user_pass',
       'database' => 'docker_db',
