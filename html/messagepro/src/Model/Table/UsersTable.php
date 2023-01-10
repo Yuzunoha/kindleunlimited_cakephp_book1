@@ -62,7 +62,11 @@ class UsersTable extends Table
             ->maxLength('username', 64)
             ->requirePresence('username', 'create')
             ->notEmptyString('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('username', 'unique', [
+                'rule' => 'validateUnique',
+                'provider' => 'table',
+                'message' => 'このユーザー名は既に使われています。',
+            ]);
 
         $validator
             ->scalar('password')
