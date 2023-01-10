@@ -295,7 +295,7 @@ return [
       'persistent' => false,
       'timezone' => 'Asia/Tokyo',
       /*
-       * app_local.php を削除しておくこと。app_local.phpが優先されるため。
+       * app_local.php でコメントアウトしておくこと。app_local.phpが優先されるため。
        */
       'host' => 'mysql', // 'cakephp3_mysql' でも接続可能。つまりサービス名でもコンテナ名でも接続できそう。
       'username' => 'docker_db_user',
