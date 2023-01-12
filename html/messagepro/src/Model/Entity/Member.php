@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Entity;
 
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
 /**
@@ -31,4 +33,11 @@ class Member extends Entity
         'pr' => true,
         'create_datetime' => true,
     ];
+
+    protected function _setMemberpass(string $memberpass): string
+    {
+        return (0 < strlen($memberpass))
+            ? (new DefaultPasswordHasher)->hash($memberpass)
+            : '';
+    }
 }
