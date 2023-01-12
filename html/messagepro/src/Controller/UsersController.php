@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 /**
  * Users Controller
  *
@@ -12,7 +14,7 @@ namespace App\Controller;
  */
 class UsersController extends AppController
 {
-    public function beforeFilter(Event $event): void
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
         // loginは許可に追加しないこと
