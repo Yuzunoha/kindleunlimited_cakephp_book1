@@ -46,8 +46,18 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
-        // 追加
-        $this->loadComponent('Auth');
+        // デフォルトのuserではなくmemberを使うようにする
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'userModel' => 'Members',
+                    'fields' => ['username' => 'membername', 'password' => 'memberpass'],
+                ]
+            ],
+            'loginAction' => '/members/login',
+            'logoutRedirect' => ['controller' => 'Members', 'action' => 'login'],
+            'loginRedirect' => ['Controller' => 'Messages', 'action' => 'index'],
+        ]);
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
