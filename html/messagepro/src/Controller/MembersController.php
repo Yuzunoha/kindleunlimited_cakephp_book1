@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
+
+use Cake\Event\EventInterface;
 
 /**
  * Members Controller
@@ -11,6 +14,12 @@ namespace App\Controller;
  */
 class MembersController extends AppController
 {
+    public function beforeFilter(EventInterface $event): void
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add', 'logout']);
+    }
+
     /**
      * Index method
      *
