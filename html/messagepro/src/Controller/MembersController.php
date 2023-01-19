@@ -59,11 +59,10 @@ class MembersController extends AppController
         if ($this->request->is('post')) {
             $member = $this->Members->patchEntity($member, $this->request->getData());
             if ($this->Members->save($member)) {
-                $this->Flash->success(__('The member has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('登録しました。メンバー名とパスワードでログインしてください。'));
+                return $this->redirect(['action' => 'login']);
             }
-            $this->Flash->error(__('The member could not be saved. Please, try again.'));
+            $this->Flash->error(__('登録に失敗しました'));
         }
         $this->set(compact('member'));
     }
@@ -110,5 +109,22 @@ class MembersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $member = $this->Auth->identify();
+            if ($member) {
+                $this->Auth->setUser($member);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error('ユーザー名かパスワードが違います');
+        }
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
     }
 }
